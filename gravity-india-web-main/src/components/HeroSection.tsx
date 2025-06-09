@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({ openBookCallDialog }: HeroSectionProps) => {
   return (
-    <section className="pt-20 relative overflow-hidden">
+    <section className="pt-24 relative overflow-hidden">
       {/* Full-width video background */}
       <div className="absolute inset-0 w-full h-full">
         <VideoCarousel />

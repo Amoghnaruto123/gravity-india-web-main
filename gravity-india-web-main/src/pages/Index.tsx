@@ -11,6 +11,7 @@ import { Toaster } from "@/components/ui/toaster";
 
 import VideoCarousel from "../components/VideoCarousel";
 import Navigation from "../components/Navigation";
+import Banner from "../components/Banner";
 import HeroSection from "../components/HeroSection";
 import SupportSection from "../components/SupportSection";
 import CompaniesSection from "../components/CompaniesSection";
@@ -146,6 +147,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Banner */}
+      <Banner />
+      
       {/* Navigation */}
       <Navigation 
         isDialogOpen={isDialogOpen} 

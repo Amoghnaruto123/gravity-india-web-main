@@ -114,22 +114,26 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
   }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm shadow-md'}`}>
-      <div className="max-w-7xl mx-auto px-2 lg:px-4">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo - Far Left */}
-          <div className="flex items-center pl-0 lg:pl-8">
-            <img src="/lovable-uploads/8c79cb12-2bc2-4bcd-95a4-8e82d3f4035f.png" alt="Gravity India Technologies" className="h-12 w-auto animate-fade-in" />
-          </div>
+    <nav className={`fixed top-[32px] w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white shadow-sm'}`}>
+      <div className="w-full px-4">
+        <div className="flex items-center justify-between w-full px-4 py-3">
           
-          {/* Center Navigation Menu */}
-          <div className="hidden lg:flex items-center justify-center flex-1 mx-6 space-x-12">
+          {/* 1️⃣ Logo on left */}
+          <div className="flex-shrink-0">
+            <img src="/lovable-uploads/8c79cb12-2bc2-4bcd-95a4-8e82d3f4035f.png"
+                 alt="Gravity India"
+                 className="h-12 w-auto" />
+          </div>
+
+          {/* 2️⃣ Center navigation links (hidden on mobile) */}
+          <div className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
+            {/* Who We Are */}
             <a href="#home" className="text-gray-700 hover:text-blue-600 relative group transition-colors font-medium whitespace-nowrap">
               Who We Are
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             </a>
-            
-            {/* Products Dropdown - Builder.io style full width */}
+
+            {/* Products dropdown */}
             <div 
               className="relative dropdown-container" 
               onMouseEnter={() => handleMouseEnter('products')}
@@ -146,7 +150,7 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               </button>
             </div>
 
-            {/* Services Dropdown - Builder.io style */}
+            {/* Services dropdown */}
             <div 
               className="relative dropdown-container"
               onMouseEnter={() => handleMouseEnter('services')}
@@ -163,7 +167,7 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               </button>
             </div>
 
-            {/* Solutions Dropdown - Builder.io style */}
+            {/* Solutions dropdown */}
             <div 
               className="relative dropdown-container"
               onMouseEnter={() => handleMouseEnter('solutions')}
@@ -180,7 +184,7 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               </button>
             </div>
 
-            {/* Company Dropdown - Builder.io style */}
+            {/* Company dropdown */}
             <div 
               className="relative dropdown-container"
               onMouseEnter={() => handleMouseEnter('company')}
@@ -196,37 +200,41 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
                 Company <ChevronDown className="ml-1 h-4 w-4" />
               </button>
             </div>
-
+            
             <a href="#resources" className="text-gray-700 hover:text-blue-600 relative group transition-colors font-medium whitespace-nowrap">
               Resources
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             </a>
           </div>
-          
-          {/* Right Side Buttons */}
-          <div className="hidden lg:flex items-center space-x-4 pr-0 lg:pr-8">
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-              <DialogTrigger asChild>
-                <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 transform transition-all duration-200 px-6 whitespace-nowrap">
-                  Book a Call
-                </Button>
-              </DialogTrigger>
-            </Dialog>
+
+          {/* 3️⃣ Rightmost action buttons + mobile menu icon */}
+          <div className="flex items-center space-x-4 ml-auto">
+            {/* Desktop buttons */}
+            <div className="hidden lg:flex space-x-4">
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 transform transition-all duration-200 px-6 whitespace-nowrap">
+                    Book a Call
+                  </Button>
+                </DialogTrigger>
+              </Dialog>
+              
+              <Button className="bg-blue-600 hover:bg-blue-700 transform transition-all duration-200 px-6 whitespace-nowrap">
+                Contact Us
+              </Button>
+            </div>
             
-            <Button className="bg-blue-600 hover:bg-blue-700 transform transition-all duration-200 px-6 whitespace-nowrap">
-              Contact Us
-            </Button>
+            {/* Mobile menu toggle */}
+            <button className="lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
-          
-          {/* Mobile Menu Button */}
-          <button className="lg:hidden hover:scale-110 transform transition-transform duration-200" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && <div className="lg:hidden bg-white shadow-lg animate-fade-in">
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-white shadow-lg animate-fade-in">
           <div className="px-4 py-6 space-y-4">
             <a href="#home" className="block text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
               Who We Are
@@ -259,7 +267,8 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               </Button>
             </div>
           </div>
-        </div>}
+        </div>
+      )}
 
       {/* Mega Dropdown for Products */}
       <div 
@@ -322,7 +331,188 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
         </div>
       </div>
 
-      {/* Similar structure for other mega dropdowns */}
+      {/* Mega Dropdown for Services */}
+      <div 
+        className={`absolute left-0 w-full bg-white border-t border-gray-200 shadow-lg transition-all duration-300 z-40 ${activeDropdown === 'services' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}
+        onMouseEnter={() => handleMouseEnter('services')}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="grid grid-cols-4 gap-8">
+            {/* Left Column - Category List */}
+            <div className="col-span-1 border-r border-gray-200 pr-8">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Our Services</h3>
+              <ul className="space-y-2">
+                {serviceCategories.map((category, index) => (
+                  <li key={index}>
+                    <a href="#" className="flex items-center py-2 text-gray-700 hover:text-blue-600 transition-colors">
+                      <span className="mr-3 text-gray-500">{category.icon}</span>
+                      <span className="font-medium">{category.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Middle Column - Popular Services */}
+            <div className="col-span-2">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Popular Services</h3>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">24/7 Monitoring</h4>
+                  <p className="text-sm text-gray-600">Real-time infrastructure monitoring</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">Maintenance Services</h4>
+                  <p className="text-sm text-gray-600">Preventive and corrective maintenance</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">Technical Support</h4>
+                  <p className="text-sm text-gray-600">Expert technical assistance</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">Installation Services</h4>
+                  <p className="text-sm text-gray-600">Professional installation and setup</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right Column - Featured */}
+            <div className="col-span-1">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Featured</h3>
+              <div className="bg-blue-50 rounded-lg p-5">
+                <h4 className="font-medium text-blue-800 mb-2">Service Plans</h4>
+                <p className="text-sm text-gray-700 mb-4">Discover our customizable service plans for enterprise infrastructure.</p>
+                <Button variant="outline" size="sm" className="text-blue-600 border-blue-600 hover:bg-blue-100">
+                  Learn More
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mega Dropdown for Solutions */}
+      <div 
+        className={`absolute left-0 w-full bg-white border-t border-gray-200 shadow-lg transition-all duration-300 z-40 ${activeDropdown === 'solutions' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}
+        onMouseEnter={() => handleMouseEnter('solutions')}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="grid grid-cols-4 gap-8">
+            {/* Left Column - Category List */}
+            <div className="col-span-1 border-r border-gray-200 pr-8">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Solution Areas</h3>
+              <ul className="space-y-2">
+                {solutionCategories.map((category, index) => (
+                  <li key={index}>
+                    <a href="#" className="flex items-center py-2 text-gray-700 hover:text-blue-600 transition-colors">
+                      <span className="mr-3 text-gray-500">{category.icon}</span>
+                      <span className="font-medium">{category.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Middle Column - Popular Solutions */}
+            <div className="col-span-2">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Featured Solutions</h3>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">Data Centers</h4>
+                  <p className="text-sm text-gray-600">Complete infrastructure solutions</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">Power Management</h4>
+                  <p className="text-sm text-gray-600">UPS and power quality systems</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">Renewable Energy</h4>
+                  <p className="text-sm text-gray-600">Solar and green energy solutions</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">Managed Services</h4>
+                  <p className="text-sm text-gray-600">24/7 monitoring and support</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right Column - Case Study */}
+            <div className="col-span-1">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Case Study</h3>
+              <div className="bg-blue-50 rounded-lg p-5">
+                <h4 className="font-medium text-blue-800 mb-2">Success Stories</h4>
+                <p className="text-sm text-gray-700 mb-4">See how our solutions have helped businesses achieve their goals.</p>
+                <Button variant="outline" size="sm" className="text-blue-600 border-blue-600 hover:bg-blue-100">
+                  Read More
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mega Dropdown for Company */}
+      <div 
+        className={`absolute left-0 w-full bg-white border-t border-gray-200 shadow-lg transition-all duration-300 z-40 ${activeDropdown === 'company' ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}
+        onMouseEnter={() => handleMouseEnter('company')}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="grid grid-cols-4 gap-8">
+            {/* Left Column - Category List */}
+            <div className="col-span-1 border-r border-gray-200 pr-8">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">About Us</h3>
+              <ul className="space-y-2">
+                {companyCategories.map((category, index) => (
+                  <li key={index}>
+                    <a href="#" className="flex items-center py-2 text-gray-700 hover:text-blue-600 transition-colors">
+                      <span className="mr-3 text-gray-500">{category.icon}</span>
+                      <span className="font-medium">{category.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Middle Column - Company Info */}
+            <div className="col-span-2">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Our Company</h3>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">About Us</h4>
+                  <p className="text-sm text-gray-600">Our story and mission</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">Careers</h4>
+                  <p className="text-sm text-gray-600">Join our growing team</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">Partners</h4>
+                  <p className="text-sm text-gray-600">Strategic alliances and partnerships</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <h4 className="font-medium text-gray-900 mb-1">News</h4>
+                  <p className="text-sm text-gray-600">Latest company updates</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right Column - Leadership */}
+            <div className="col-span-1">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Leadership</h3>
+              <div className="bg-blue-50 rounded-lg p-5">
+                <h4 className="font-medium text-blue-800 mb-2">Meet Our Team</h4>
+                <p className="text-sm text-gray-700 mb-4">Learn about the people behind Gravity India Technologies.</p>
+                <Button variant="outline" size="sm" className="text-blue-600 border-blue-600 hover:bg-blue-100">
+                  View Team
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </nav>
   );
 };
