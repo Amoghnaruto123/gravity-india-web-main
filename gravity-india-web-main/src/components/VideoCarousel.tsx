@@ -69,28 +69,6 @@ const VideoCarousel = () => {
           </video>
         </div>
       ))}
-      
-      {/* Video indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
-        {videos.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              setCurrentVideoIndex(index);
-              // Play the selected video
-              const selectedVideo = videoRefs.current[index];
-              if (selectedVideo) {
-                selectedVideo.currentTime = 0;
-                selectedVideo.play();
-              }
-            }}
-            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-              index === currentVideoIndex ? 'bg-orange-500 scale-125' : 'bg-white/50 hover:bg-white/80'
-            }`}
-            aria-label={`Show video ${index + 1}`}
-          />
-        ))}
-      </div>
     </div>
   );
 };
