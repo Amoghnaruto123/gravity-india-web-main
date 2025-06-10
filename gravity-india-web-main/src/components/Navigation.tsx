@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -18,6 +18,7 @@ interface NavigationProps {
 const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSectionOpen, setMobileSectionOpen] = useState<string | null>(null);
   
   // Add new state for tracking dropdown visibility
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -29,6 +30,18 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   // Product categories data for dropdown
   const productCategories = [
@@ -81,6 +94,15 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
     }
   };
   
+  // Function to handle mobile section toggle
+  const toggleMobileSection = (section: string) => {
+    if (mobileSectionOpen === section) {
+      setMobileSectionOpen(null);
+    } else {
+      setMobileSectionOpen(section);
+    }
+  };
+  
   // Function to handle mouse enter (hover)
   const handleMouseEnter = (dropdown: string) => {
     setActiveDropdown(dropdown);
@@ -114,26 +136,23 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
   }, []);
 
   return (
-    <nav className={`fixed top-[32px] w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white shadow-sm'}`}>
-      <div className="w-full px-4">
-        <div className="flex items-center justify-between w-full px-4 py-3">
-          
-          {/* 1️⃣ Logo on left */}
-          <div className="flex-shrink-0">
+    <nav className={`fixed top-[var(--banner-height,0px)] w-full z-40 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white shadow-sm'}`}>
+      <div className="w-fullpx-6">
+        <div className="realtive flex items-center w-full h-20">
+          {/* Logo on left */}
+          <div className="flex-shrink-0 left-0 pl-6 ">
             <img src="/lovable-uploads/8c79cb12-2bc2-4bcd-95a4-8e82d3f4035f.png"
                  alt="Gravity India"
                  className="h-12 w-auto" />
           </div>
 
-          {/* 2️⃣ Center navigation links (hidden on mobile) */}
+          {/* Navigation Links - Center with flex-auto and justify-center */}
           <div className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            {/* Who We Are */}
             <a href="#home" className="text-gray-700 hover:text-blue-600 relative group transition-colors font-medium whitespace-nowrap">
               Who We Are
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             </a>
 
-            {/* Products dropdown */}
             <div 
               className="relative dropdown-container" 
               onMouseEnter={() => handleMouseEnter('products')}
@@ -150,7 +169,6 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               </button>
             </div>
 
-            {/* Services dropdown */}
             <div 
               className="relative dropdown-container"
               onMouseEnter={() => handleMouseEnter('services')}
@@ -167,7 +185,6 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               </button>
             </div>
 
-            {/* Solutions dropdown */}
             <div 
               className="relative dropdown-container"
               onMouseEnter={() => handleMouseEnter('solutions')}
@@ -184,7 +201,6 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               </button>
             </div>
 
-            {/* Company dropdown */}
             <div 
               className="relative dropdown-container"
               onMouseEnter={() => handleMouseEnter('company')}
@@ -207,8 +223,8 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
             </a>
           </div>
 
-          {/* 3️⃣ Rightmost action buttons + mobile menu icon */}
-          <div className="flex items-center space-x-4 ml-auto">
+          {/* Rightmost action buttons + mobile menu icon */}
+          <div className="flex items-center space-x-4 absolute right-0 pr-6">
             {/* Desktop buttons */}
             <div className="hidden lg:flex space-x-4">
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -232,39 +248,133 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - Vertiv style */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white shadow-lg animate-fade-in">
-          <div className="px-4 py-6 space-y-4">
-            <a href="#home" className="block text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-              Who We Are
-            </a>
-            <a href="#products" className="block text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-              Products
-            </a>
-            <a href="#services" className="block text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-              Services
-            </a>
-            <a href="#solutions" className="block text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-              Solutions
-            </a>
-            <a href="#company" className="block text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-              Company
-            </a>
-            <a href="#resources" className="block text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-              Resources
-            </a>
-            <div className="pt-4 space-y-3">
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button variant="outline" className="w-full border-blue-600 text-blue-600 hover:bg-blue-50">
-                    Book a Call
+        <div className="lg:hidden fixed inset-0 z-50 bg-white">
+          <div className="flex justify-between items-center h-20 px-6 border-b border-gray-200">
+            <img src="/lovable-uploads/8c79cb12-2bc2-4bcd-95a4-8e82d3f4035f.png" alt="Gravity India" className="h-10 w-auto" />
+            <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+          
+          <div className="overflow-y-auto h-[calc(100vh-5rem)]">
+            <div className="flex flex-col divide-y divide-gray-200">
+              <a href="#home" className="px-6 py-4 text-gray-800 font-medium">
+                Who We Are
+              </a>
+              
+              {/* Products Dropdown */}
+              <div className="border-b border-gray-200">
+                <button 
+                  onClick={() => toggleMobileSection('products')}
+                  className="w-full px-6 py-4 flex justify-between items-center text-gray-800 font-medium"
+                >
+                  <span>Products</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${mobileSectionOpen === 'products' ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {mobileSectionOpen === 'products' && (
+                  <div className="bg-gray-50 py-2">
+                    {productCategories.map((category, index) => (
+                      <a key={index} href="#" className="block px-8 py-2 text-gray-700 hover:text-blue-600">
+                        {category.name}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {/* Services Dropdown */}
+              <div className="border-b border-gray-200">
+                <button 
+                  onClick={() => toggleMobileSection('services')}
+                  className="w-full px-6 py-4 flex justify-between items-center text-gray-800 font-medium"
+                >
+                  <span>Services</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${mobileSectionOpen === 'services' ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {mobileSectionOpen === 'services' && (
+                  <div className="bg-gray-50 py-2">
+                    {serviceCategories.map((category, index) => (
+                      <a key={index} href="#" className="block px-8 py-2 text-gray-700 hover:text-blue-600">
+                        {category.name}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {/* Solutions Dropdown */}
+              <div className="border-b border-gray-200">
+                <button 
+                  onClick={() => toggleMobileSection('solutions')}
+                  className="w-full px-6 py-4 flex justify-between items-center text-gray-800 font-medium"
+                >
+                  <span>Solutions</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${mobileSectionOpen === 'solutions' ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {mobileSectionOpen === 'solutions' && (
+                  <div className="bg-gray-50 py-2">
+                    {solutionCategories.map((category, index) => (
+                      <a key={index} href="#" className="block px-8 py-2 text-gray-700 hover:text-blue-600">
+                        {category.name}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {/* Company Dropdown */}
+              <div className="border-b border-gray-200">
+                <button 
+                  onClick={() => toggleMobileSection('company')}
+                  className="w-full px-6 py-4 flex justify-between items-center text-gray-800 font-medium"
+                >
+                  <span>Company</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${mobileSectionOpen === 'company' ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {mobileSectionOpen === 'company' && (
+                  <div className="bg-gray-50 py-2">
+                    {companyCategories.map((category, index) => (
+                      <a key={index} href="#" className="block px-8 py-2 text-gray-700 hover:text-blue-600">
+                        {category.name}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              <a href="#resources" className="px-6 py-4 text-gray-800 font-medium">
+                Resources
+              </a>
+              
+              {/* CTA Buttons */}
+              <div className="px-6 py-4">
+                <div className="grid gap-3">
+                  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <DialogTrigger asChild>
+                      <Button 
+                        variant="outline" 
+                        className="w-full border-blue-600 text-blue-600 bg-transparent py-4 hover:bg-blue-50"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Book a Call
+                      </Button>
+                    </DialogTrigger>
+                  </Dialog>
+                  
+                  <Button 
+                    className="w-full bg-blue-600 text-white py-4 hover:bg-blue-700"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Contact Us
                   </Button>
-                </DialogTrigger>
-              </Dialog>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                Contact Us
-              </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

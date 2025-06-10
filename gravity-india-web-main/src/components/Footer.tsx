@@ -2,7 +2,7 @@ import { Phone, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-sky-300 via-sky-500 to-sky-700 text-white py-16">
+    <footer className="bg-gradient-to-r from-blue-600 via-blue-500 to-red-500 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="col-span-1 md:col-span-2">
@@ -29,33 +29,33 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-lg mb-4">Services</h4>
             <ul className="space-y-3 text-white">
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Data Center Solutions</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Power & UPS Systems</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Cooling Solutions</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Renewable Energy</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Managed Services</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Data Center Solutions</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Power & UPS Systems</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Cooling Solutions</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Renewable Energy</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Managed Services</a></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold text-lg mb-4">Company</h4>
             <ul className="space-y-3 text-white">
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">About Us</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Leadership</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Careers</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">News & Press</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Contact</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">About Us</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Leadership</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Careers</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">News & Press</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Contact</a></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold text-lg mb-4">Support</h4>
             <ul className="space-y-3 text-white">
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">24/7 Monitoring</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Technical Support</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Maintenance Plans</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">Training</a></li>
-              <li><a href="#" className="hover:text-sky-100 transition-colors hover:scale-105 transform duration-200 inline-block">FAQs</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">24/7 Monitoring</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Technical Support</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Maintenance Plans</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">Training</a></li>
+              <li><a href="#" className="hover:text-blue-100 transition-colors hover:scale-105 transform duration-200 inline-block">FAQs</a></li>
             </ul>
           </div>
         </div>
@@ -74,8 +74,8 @@ const Footer = () => {
             </div>
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2 hover:scale-105 transform transition-transform duration-200">
-                <Phone className="h-4 w-4 text-orange-300" />
-                <span className="text-orange-300">+91 9886710105</span>
+                <Phone className="h-4 w-4 text-white" />
+                <span className="text-white font-semibold">+91 9886710105</span>
               </div>
               <div className="flex items-center space-x-2 hover:scale-105 transform transition-transform duration-200">
                 <Mail className="h-4 w-4 text-white" />
