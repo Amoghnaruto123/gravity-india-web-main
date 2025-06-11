@@ -10,11 +10,36 @@ const VideoCarousel = () => {
   
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [videosLoaded, setVideosLoaded] = useState<boolean[]>([]);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   
-  // Setup video refs array
+  // Setup video refs array and initialize all videos
   useEffect(() => {
     videoRefs.current = videoRefs.current.slice(0, videos.length);
+    
+    // Preload all videos and mark them as loaded
+    const loadedStatus = new Array(videos.length).fill(false);
+    setVideosLoaded(loadedStatus);
+    
+    // Initialize all videos
+    videoRefs.current.forEach((videoRef, index) => {
+      if (videoRef) {
+        // Set event listener for when the video is loaded
+        videoRef.addEventListener('loadeddata', () => {
+          setVideosLoaded(prev => {
+            const newStatus = [...prev];
+            newStatus[index] = true;
+            return newStatus;
+          });
+          
+          // Pause all videos except the first one
+          if (index !== 0) {
+            videoRef.pause();
+            videoRef.currentTime = 0;
+          }
+        });
+      }
+    });
   }, [videos.length]);
   
   // Function to change videos with a more subtle transition
@@ -23,14 +48,22 @@ const VideoCarousel = () => {
     
     // After a short fade out animation, change the video
     setTimeout(() => {
-      setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
+      const nextIndex = (currentVideoIndex + 1) % videos.length;
+      setCurrentVideoIndex(nextIndex);
       setIsTransitioning(false);
       
-      // If we have a ref to the new video, play it
-      const nextVideo = videoRefs.current[currentVideoIndex];
+      // Ensure all videos are paused
+      videoRefs.current.forEach((video, idx) => {
+        if (video && idx !== nextIndex) {
+          video.pause();
+        }
+      });
+      
+      // Play the next video
+      const nextVideo = videoRefs.current[nextIndex];
       if (nextVideo) {
         nextVideo.currentTime = 0;
-        nextVideo.play();
+        nextVideo.play().catch(e => console.error("Video play error:", e));
       }
     }, 600); // Shorter transition duration
   };
@@ -43,8 +76,11 @@ const VideoCarousel = () => {
   
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden">
-      {/* Dark overlay for better text visibility */}
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/30 z-10"></div>
+      {/* Enhanced dark overlay with more coverage to cover text area */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/85 to-slate-900/75 z-10"></div>
+      
+      {/* Additional overlay to ensure even coverage */}
+      <div className="absolute inset-0 bg-slate-900/40 z-5"></div>
       
       {/* Video elements with more subtle transitions */}
       {videos.map((videoSrc, index) => (
@@ -63,6 +99,7 @@ const VideoCarousel = () => {
             muted
             loop
             playsInline
+            preload="auto"
           >
             <source src={videoSrc} type="video/mp4" />
             Your browser does not support the video tag.

@@ -34,11 +34,6 @@ const StatsSection = () => {
       className="py-12 bg-gray-50 border-b border-gray-100 md:py-16"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10 md:mb-14">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Get the Numbers</h2>
-          <p className="text-gray-600 mt-2">Our track record of excellence and reliability</p>
-        </div>
-
         {/* Mobile View (2x2 Grid with minimal styling) */}
         <div className="md:hidden grid grid-cols-2 gap-y-10 gap-x-6 max-w-sm mx-auto">
           {/* First row - left item */}

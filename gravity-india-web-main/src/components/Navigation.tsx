@@ -160,11 +160,6 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
 
           {/* Navigation Links - Center with flex-auto and justify-center */}
           <div className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            <a href="#home" className="text-gray-700 hover:text-blue-600 relative group transition-colors font-medium whitespace-nowrap">
-              Who We Are
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-
             <div 
               className="relative dropdown-container" 
               onMouseEnter={() => handleMouseEnter('products')}
@@ -286,10 +281,6 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
         
         <div className="overflow-y-auto h-[calc(100vh-5rem)]">
           <div className="flex flex-col divide-y divide-gray-200">
-            <a href="#home" className="px-6 py-4 text-gray-800 font-medium">
-              Who We Are
-            </a>
-            
             {/* Products Dropdown */}
             <div className="border-b border-gray-200">
               <button 
@@ -302,12 +293,15 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               
               <div className={`bg-gray-50 overflow-hidden transition-all duration-300 ease-in-out
                 ${mobileSectionOpen === 'products' ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
-                <div className="py-2">
-                  {productCategories.map((category, index) => (
-                    <a key={index} href="#" className="block px-8 py-2 text-gray-700 hover:text-blue-600">
-                      {category.name}
-                    </a>
-                  ))}
+                <div className="p-4">
+                  <div className="grid grid-cols-2 gap-3">
+                    {productCategories.slice(0, 4).map((category, index) => (
+                      <a key={index} href="#" className="bg-white rounded-lg p-3 shadow-sm hover:shadow transition-shadow">
+                        <h4 className="font-medium text-gray-900 text-sm">{category.name}</h4>
+                        <p className="text-xs text-gray-600 mt-1">{category.description}</p>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -324,12 +318,15 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               
               <div className={`bg-gray-50 overflow-hidden transition-all duration-300 ease-in-out
                 ${mobileSectionOpen === 'services' ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
-                <div className="py-2">
-                  {serviceCategories.map((category, index) => (
-                    <a key={index} href="#" className="block px-8 py-2 text-gray-700 hover:text-blue-600">
-                      {category.name}
-                    </a>
-                  ))}
+                <div className="p-4">
+                  <div className="grid grid-cols-2 gap-3">
+                    {serviceCategories.slice(0, 4).map((category, index) => (
+                      <a key={index} href="#" className="bg-white rounded-lg p-3 shadow-sm hover:shadow transition-shadow">
+                        <h4 className="font-medium text-gray-900 text-sm">{category.name}</h4>
+                        <p className="text-xs text-gray-600 mt-1">{category.description}</p>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -346,12 +343,15 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               
               <div className={`bg-gray-50 overflow-hidden transition-all duration-300 ease-in-out
                 ${mobileSectionOpen === 'solutions' ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
-                <div className="py-2">
-                  {solutionCategories.map((category, index) => (
-                    <a key={index} href="#" className="block px-8 py-2 text-gray-700 hover:text-blue-600">
-                      {category.name}
-                    </a>
-                  ))}
+                <div className="p-4">
+                  <div className="grid grid-cols-2 gap-3">
+                    {solutionCategories.slice(0, 4).map((category, index) => (
+                      <a key={index} href="#" className="bg-white rounded-lg p-3 shadow-sm hover:shadow transition-shadow">
+                        <h4 className="font-medium text-gray-900 text-sm">{category.name}</h4>
+                        <p className="text-xs text-gray-600 mt-1">{category.description}</p>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -368,12 +368,15 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               
               <div className={`bg-gray-50 overflow-hidden transition-all duration-300 ease-in-out
                 ${mobileSectionOpen === 'company' ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
-                <div className="py-2">
-                  {companyCategories.map((category, index) => (
-                    <a key={index} href="#" className="block px-8 py-2 text-gray-700 hover:text-blue-600">
-                      {category.name}
-                    </a>
-                  ))}
+                <div className="p-4">
+                  <div className="grid grid-cols-2 gap-3">
+                    {companyCategories.slice(0, 4).map((category, index) => (
+                      <a key={index} href="#" className="bg-white rounded-lg p-3 shadow-sm hover:shadow transition-shadow">
+                        <h4 className="font-medium text-gray-900 text-sm">{category.name}</h4>
+                        <p className="text-xs text-gray-600 mt-1">{category.description}</p>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -417,41 +420,15 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
       >
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="grid grid-cols-4 gap-8">
-            {/* Left Column - Category List */}
-            <div className="col-span-1 border-r border-gray-200 pr-8">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Categories</h3>
-              <ul className="space-y-2">
+            <div className="col-span-3">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Product Categories</h3>
+              <div className="grid grid-cols-3 gap-6">
                 {productCategories.map((category, index) => (
-                  <li key={index}>
-                    <a href="#" className="flex items-center py-2 text-gray-700 hover:text-blue-600 transition-colors">
-                      <span className="mr-3 text-gray-500">{category.icon}</span>
-                      <span className="font-medium">{category.name}</span>
-                    </a>
-                  </li>
+                  <div key={index} className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                    <h4 className="font-medium text-gray-900 mb-1">{category.name}</h4>
+                    <p className="text-sm text-gray-600">{category.description}</p>
+                  </div>
                 ))}
-              </ul>
-            </div>
-            
-            {/* Middle Column - Popular Products */}
-            <div className="col-span-2">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Popular Products</h3>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">UPS Systems</h4>
-                  <p className="text-sm text-gray-600">Uninterruptible power supplies for critical applications</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Cooling Solutions</h4>
-                  <p className="text-sm text-gray-600">Precision air conditioning systems</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Power Distribution</h4>
-                  <p className="text-sm text-gray-600">PDUs and power management solutions</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Solar Solutions</h4>
-                  <p className="text-sm text-gray-600">Renewable energy products and systems</p>
-                </div>
               </div>
             </div>
             
@@ -478,41 +455,15 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
       >
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="grid grid-cols-4 gap-8">
-            {/* Left Column - Category List */}
-            <div className="col-span-1 border-r border-gray-200 pr-8">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Our Services</h3>
-              <ul className="space-y-2">
+            <div className="col-span-3">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Service Categories</h3>
+              <div className="grid grid-cols-3 gap-6">
                 {serviceCategories.map((category, index) => (
-                  <li key={index}>
-                    <a href="#" className="flex items-center py-2 text-gray-700 hover:text-blue-600 transition-colors">
-                      <span className="mr-3 text-gray-500">{category.icon}</span>
-                      <span className="font-medium">{category.name}</span>
-                    </a>
-                  </li>
+                  <div key={index} className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                    <h4 className="font-medium text-gray-900 mb-1">{category.name}</h4>
+                    <p className="text-sm text-gray-600">{category.description}</p>
+                  </div>
                 ))}
-              </ul>
-            </div>
-            
-            {/* Middle Column - Popular Services */}
-            <div className="col-span-2">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Popular Services</h3>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">24/7 Monitoring</h4>
-                  <p className="text-sm text-gray-600">Real-time infrastructure monitoring</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Maintenance Services</h4>
-                  <p className="text-sm text-gray-600">Preventive and corrective maintenance</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Technical Support</h4>
-                  <p className="text-sm text-gray-600">Expert technical assistance</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Installation Services</h4>
-                  <p className="text-sm text-gray-600">Professional installation and setup</p>
-                </div>
               </div>
             </div>
             
@@ -539,41 +490,15 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
       >
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="grid grid-cols-4 gap-8">
-            {/* Left Column - Category List */}
-            <div className="col-span-1 border-r border-gray-200 pr-8">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Our Solutions</h3>
-              <ul className="space-y-2">
+            <div className="col-span-3">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Solution Categories</h3>
+              <div className="grid grid-cols-3 gap-6">
                 {solutionCategories.map((category, index) => (
-                  <li key={index}>
-                    <a href="#" className="flex items-center py-2 text-gray-700 hover:text-blue-600 transition-colors">
-                      <span className="mr-3 text-gray-500">{category.icon}</span>
-                      <span className="font-medium">{category.name}</span>
-                    </a>
-                  </li>
+                  <div key={index} className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                    <h4 className="font-medium text-gray-900 mb-1">{category.name}</h4>
+                    <p className="text-sm text-gray-600">{category.description}</p>
+                  </div>
                 ))}
-              </ul>
-            </div>
-            
-            {/* Middle Column - Popular Solutions */}
-            <div className="col-span-2">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Popular Solutions</h3>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Data Centers</h4>
-                  <p className="text-sm text-gray-600">Complete infrastructure solutions</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Power Management</h4>
-                  <p className="text-sm text-gray-600">UPS and power quality systems</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Renewable Energy</h4>
-                  <p className="text-sm text-gray-600">Solar and green energy solutions</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Managed Services</h4>
-                  <p className="text-sm text-gray-600">24/7 monitoring and support</p>
-                </div>
               </div>
             </div>
             
@@ -600,41 +525,15 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
       >
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="grid grid-cols-4 gap-8">
-            {/* Left Column - Category List */}
-            <div className="col-span-1 border-r border-gray-200 pr-8">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Company</h3>
-              <ul className="space-y-2">
+            <div className="col-span-3">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">Company Information</h3>
+              <div className="grid grid-cols-3 gap-6">
                 {companyCategories.map((category, index) => (
-                  <li key={index}>
-                    <a href="#" className="flex items-center py-2 text-gray-700 hover:text-blue-600 transition-colors">
-                      <span className="mr-3 text-gray-500">{category.icon}</span>
-                      <span className="font-medium">{category.name}</span>
-                    </a>
-                  </li>
+                  <div key={index} className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                    <h4 className="font-medium text-gray-900 mb-1">{category.name}</h4>
+                    <p className="text-sm text-gray-600">{category.description}</p>
+                  </div>
                 ))}
-              </ul>
-            </div>
-            
-            {/* Middle Column - Popular Pages */}
-            <div className="col-span-2">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-4">About Us</h3>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Our Story</h4>
-                  <p className="text-sm text-gray-600">Learn about our journey and mission</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Leadership</h4>
-                  <p className="text-sm text-gray-600">Meet our executive team</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">Careers</h4>
-                  <p className="text-sm text-gray-600">Join our growing team</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                  <h4 className="font-medium text-gray-900 mb-1">News</h4>
-                  <p className="text-sm text-gray-600">Latest company updates</p>
-                </div>
               </div>
             </div>
             

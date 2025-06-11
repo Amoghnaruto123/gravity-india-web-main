@@ -133,7 +133,7 @@ const Index = () => {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
-            <DialogTitle>Book a Call</DialogTitle>
+            <DialogTitle>Book a CallBack</DialogTitle>
           </DialogHeader>
           {formSubmitted ? (
             <div className="py-8 text-center">
