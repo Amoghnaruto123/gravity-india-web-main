@@ -49,7 +49,7 @@ const HeroSection = ({ openBookCallDialog }: HeroSectionProps) => {
         <div className="flex flex-col min-h-[600px] justify-center py-16 lg:py-24">
           <div className="max-w-2xl animate-fade-in">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
-              IT Solutions for Modern Enterprises
+              Comprehensive IT Infrastructure & Power Solutions for Enterprise Growth
             </h1>
             <p className="text-xl text-gray-300 mb-8">
               30+ Years of Expertise in Power Management, Infrastructure Development, and Auditing Services.
