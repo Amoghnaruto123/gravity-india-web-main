@@ -7,7 +7,7 @@ const FAQSection = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Get answers to common questions about our infrastructure solutions and services.
+            Get answers to common questions about our solutions and services.
           </p>
         </div>
 
@@ -15,12 +15,12 @@ const FAQSection = () => {
           {/* FAQ Item 1 */}
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
             <button className="w-full flex items-center justify-between p-6 text-left">
-              <h3 className="text-xl font-semibold text-gray-900">What infrastructure solutions do you provide?</h3>
+              <h3 className="text-xl font-semibold text-gray-900">What solutions do you provide?</h3>
               <span className="text-2xl">+</span>
             </button>
             <div className="px-6 pb-6">
               <p className="text-gray-700">
-                We offer comprehensive infrastructure solutions including data center design and implementation, power management systems, cooling solutions, renewable energy integration, and end-to-end managed services with 24/7 monitoring and support.
+                We offer data center design and implementation, power management systems, cooling solutions, renewable energy integration, and managed services with 24/7 monitoring and support.
               </p>
             </div>
           </div>
@@ -33,7 +33,7 @@ const FAQSection = () => {
             </button>
             <div className="px-6 pb-6">
               <p className="text-gray-700">
-                We provide comprehensive support packages ranging from 1 to 5 years, with options for extended warranties. Our standard support includes 24/7 monitoring, emergency response within 4 hours, preventative maintenance, and quarterly performance reviews.
+                We provide support packages ranging from 1 to 5 years, with options for extended warranties. Our standard support includes 24/7 monitoring, emergency response within 4 hours, preventative maintenance, and quarterly performance reviews.
               </p>
             </div>
           </div>
@@ -59,7 +59,7 @@ const FAQSection = () => {
             </button>
             <div className="px-6 pb-6">
               <p className="text-gray-700">
-                Yes, we specialize in renewable energy integration, including solar power solutions, smart grid integration, energy storage systems, and comprehensive ESG consulting to help organizations meet sustainability goals and compliance requirements.
+                Yes, we specialize in renewable energy integration, including solar power solutions, smart grid integration, energy storage systems, and ESG consulting to help organizations meet sustainability goals and compliance requirements.
               </p>
             </div>
           </div>

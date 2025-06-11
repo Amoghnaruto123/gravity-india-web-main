@@ -13,12 +13,8 @@ import VideoCarousel from "../components/VideoCarousel";
 import Navigation from "../components/Navigation";
 import Banner from "../components/Banner";
 import HeroSection from "../components/HeroSection";
-import SupportSection from "../components/SupportSection";
 import CompaniesSection from "../components/CompaniesSection";
-import SolutionsSection from "../components/SolutionsSection";
 import TestimonialsSection from "../components/TestimonialsSection";
-import ProductsSection from "../components/ProductsSection";
-import BlogsSection from "../components/BlogsSection";
 import TeamSection from "../components/TeamSection";
 import FAQSection from "../components/FAQSection";
 import StatsSection from "../components/StatsSection";
@@ -99,52 +95,6 @@ const Index = () => {
     logo: "/lovable-uploads/L12.png"
   }];
 
-  const products = [{
-    title: "The Future of Data Center Cooling: Liquid vs Air",
-    excerpt: "Exploring the latest trends in data center cooling technologies and their impact on energy efficiency and operational performance in modern enterprise environments.",
-    date: "March 15, 2024",
-    readTime: "5 min read",
-    category: "Technology"
-  }, {
-    title: "Solar Power Integration in Enterprise Infrastructure",
-    excerpt: "How modern enterprises are leveraging solar power solutions to reduce operational costs, improve sustainability, and achieve carbon neutrality goals.",
-    date: "March 10, 2024",
-    readTime: "7 min read",
-    category: "Renewable Energy"
-  }, {
-    title: "Achieving Tier IV Data Center Certification",
-    excerpt: "A comprehensive guide to understanding and implementing Tier IV data center standards for maximum uptime and fault tolerance.",
-    date: "March 5, 2024",
-    readTime: "8 min read",
-    category: "Infrastructure"
-  }];
-  
-  const solutions = [{
-    title: "Enterprise Data Center Solutions",
-    excerpt: "Complete end-to-end data center infrastructure with Tier IV certification, 99.99% uptime guarantee, and advanced monitoring systems.",
-    date: "Complete Solutions",
-    readTime: "24/7 Support",
-    category: "Data Centers"
-  }, {
-    title: "Advanced Power Management Systems",
-    excerpt: "Comprehensive power solutions including UPS systems, battery backup, intelligent power distribution, and real-time monitoring.",
-    date: "Power Solutions",
-    readTime: "99.9% Efficiency",
-    category: "Power Management"
-  }, {
-    title: "Precision Cooling & Climate Control",
-    excerpt: "Advanced precision cooling solutions with environmental optimization, energy efficiency, and intelligent climate management.",
-    date: "Cooling Systems",
-    readTime: "Energy Efficient",
-    category: "Climate Control"
-  }, {
-    title: "Renewable Energy Integration",
-    excerpt: "Innovative solar and renewable energy solutions with smart grid integration, energy storage, and ROI optimization.",
-    date: "Green Energy",
-    readTime: "Sustainable",
-    category: "Renewable Energy"
-  }];
-
   return (
     <div className="min-h-screen bg-white">
       {/* Banner */}
@@ -161,23 +111,14 @@ const Index = () => {
       {/* Hero Section */}
       <HeroSection openBookCallDialog={() => setIsDialogOpen(true)} />
       
-      {/* Support Section */}
-      <SupportSection />
+      {/* Stats Section */}
+      <StatsSection />
       
       {/* Companies Section */}
       <CompaniesSection companies={companies} />
       
-      {/* Solutions Section */}
-      <SolutionsSection solutions={solutions} />
-      
       {/* Testimonials Section */}
       <TestimonialsSection />
-      
-      {/* Products Section */}
-      <ProductsSection products={products} />
-      
-      {/* Blogs Section */}
-      <BlogsSection blogs={products} />
       
       {/* Team Section */}
       <TeamSection />
@@ -185,18 +126,15 @@ const Index = () => {
       {/* FAQ Section */}
       <FAQSection />
       
-      {/* Stats Section */}
-      <StatsSection />
-      
       {/* Footer */}
       <Footer />
 
       {/* Book a Call Dialog */}
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="sm:max-w-[500px]">
-                  <DialogHeader>
-                    <DialogTitle>Book a Call</DialogTitle>
-                  </DialogHeader>
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Book a Call</DialogTitle>
+          </DialogHeader>
           {formSubmitted ? (
             <div className="py-8 text-center">
               <div className="mb-4 mx-auto w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
@@ -210,118 +148,118 @@ const Index = () => {
               </p>
             </div>
           ) : (
-                  <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                      <FormField
-                        control={form.control}
-                        name="category"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Category</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select a category" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                <SelectItem value="data-centers">Data Centers</SelectItem>
-                                <SelectItem value="ups-systems">UPS Systems</SelectItem>
-                                <SelectItem value="cooling-solutions">Cooling Solutions</SelectItem>
-                                <SelectItem value="power-distribution">Power Distribution</SelectItem>
-                                <SelectItem value="solar-solutions">Solar Solutions</SelectItem>
-                                <SelectItem value="maintenance">Maintenance Services</SelectItem>
-                                <SelectItem value="monitoring">24/7 Monitoring</SelectItem>
-                                <SelectItem value="other">Other</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Name</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Your full name" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="company"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Company</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Your company name" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                              <Input type="email" placeholder="your.email@company.com" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="phone"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Phone</FormLabel>
-                            <FormControl>
-                              <Input placeholder="+91 9876543210" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="note"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Note</FormLabel>
-                            <FormControl>
-                              <Textarea placeholder="Tell us about your requirements..." {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                        Submit Request
-                      </Button>
-                    </form>
-                  </Form>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Category</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a category" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="data-centers">Data Centers</SelectItem>
+                          <SelectItem value="ups-systems">UPS Systems</SelectItem>
+                          <SelectItem value="cooling-solutions">Cooling Solutions</SelectItem>
+                          <SelectItem value="power-distribution">Power Distribution</SelectItem>
+                          <SelectItem value="solar-solutions">Solar Solutions</SelectItem>
+                          <SelectItem value="maintenance">Maintenance Services</SelectItem>
+                          <SelectItem value="monitoring">24/7 Monitoring</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your full name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="company"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Company</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your company name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="your.email@company.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone</FormLabel>
+                      <FormControl>
+                        <Input placeholder="+91 9876543210" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="note"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Note</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Tell us about your requirements..." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
+                  Submit Request
+                </Button>
+              </form>
+            </Form>
           )}
-                </DialogContent>
-              </Dialog>
-              
+        </DialogContent>
+      </Dialog>
+      
       {/* Toaster for notifications */}
       <Toaster />
-            </div>
+    </div>
   );
 };
 
