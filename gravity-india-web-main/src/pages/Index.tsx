@@ -19,6 +19,8 @@ import TeamSection from "../components/TeamSection";
 import FAQSection from "../components/FAQSection";
 import StatsSection from "../components/StatsSection";
 import Footer from "../components/Footer";
+import { DialogOverlay } from '@radix-ui/react-dialog';
+import { CheckIcon } from 'lucide-react';
 
 const Index = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -158,129 +160,192 @@ const Index = () => {
 
       {/* Book a Call Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-[500px]">
-          <DialogHeader>
-            <DialogTitle>Book a CallBack</DialogTitle>
-          </DialogHeader>
-          {formSubmitted ? (
-            <div className="py-8 text-center">
-              <div className="mb-4 mx-auto w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-medium text-gray-900 mb-2">Booking Confirmed!</h3>
-              <p className="text-gray-600">
-                Thank you for your interest. We'll contact you within 24 hours to schedule your call.
-              </p>
+        <DialogOverlay className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
+        <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-xl">
+          <div className="flex">
+            {/* Left side: Form */}
+            <div className="w-1/2 p-8 bg-white">
+              <DialogHeader className="mb-6">
+                <DialogTitle className="text-2xl font-bold text-gray-900 mb-2">Book a CallBack</DialogTitle>
+                <p className="text-gray-600">Get expert consultation for your IT infrastructure needs</p>
+              </DialogHeader>
+
+              {formSubmitted ? (
+                <div className="text-center py-12">
+                  <div className="mb-4 mx-auto w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Booking Confirmed!</h3>
+                  <p className="text-gray-600">
+                    Thank you for your interest. We'll contact you within 24 hours.
+                  </p>
+                </div>
+              ) : (
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <FormField
+                      control={form.control}
+                      name="category"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Category</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                                <SelectValue placeholder="Select a category" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent className="max-h-60 overflow-y-auto border border-gray-200 bg-white shadow-lg rounded-md">
+                              <SelectItem 
+                                value="data-centers" 
+                                className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-200 ease-in-out"
+                              >
+                                Data Centers
+                              </SelectItem>
+                              <SelectItem 
+                                value="ups-systems" 
+                                className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-200 ease-in-out"
+                              >
+                                UPS Systems
+                              </SelectItem>
+                              <SelectItem 
+                                value="cooling-solutions" 
+                                className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-200 ease-in-out"
+                              >
+                                Cooling Solutions
+                              </SelectItem>
+                              <SelectItem 
+                                value="power-distribution" 
+                                className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-200 ease-in-out"
+                              >
+                                Power Distribution
+                              </SelectItem>
+                              <SelectItem 
+                                value="solar-solutions" 
+                                className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-200 ease-in-out"
+                              >
+                                Solar Solutions
+                              </SelectItem>
+                              <SelectItem 
+                                value="maintenance" 
+                                className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-200 ease-in-out"
+                              >
+                                Maintenance Services
+                              </SelectItem>
+                              <SelectItem 
+                                value="monitoring" 
+                                className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-200 ease-in-out"
+                              >
+                                24/7 Monitoring
+                              </SelectItem>
+                              <SelectItem 
+                                value="other" 
+                                className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-200 ease-in-out"
+                              >
+                                Other
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Name</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="Your full name" 
+                              {...field} 
+                              className="px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input 
+                              type="email"
+                              placeholder="your.email@company.com" 
+                              {...field} 
+                              className="px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Phone</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="+91 9876543210" 
+                              {...field} 
+                              className="px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="note"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Note</FormLabel>
+                          <FormControl>
+                            <Textarea 
+                              placeholder="Tell us about your requirements..." 
+                              {...field} 
+                              className="px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <Button 
+                      type="submit" 
+                      className="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-300 ease-in-out"
+                    >
+                      Schedule Consultation
+                    </Button>
+                  </form>
+                </Form>
+              )}
             </div>
-          ) : (
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="category"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Category</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select a category" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="data-centers">Data Centers</SelectItem>
-                          <SelectItem value="ups-systems">UPS Systems</SelectItem>
-                          <SelectItem value="cooling-solutions">Cooling Solutions</SelectItem>
-                          <SelectItem value="power-distribution">Power Distribution</SelectItem>
-                          <SelectItem value="solar-solutions">Solar Solutions</SelectItem>
-                          <SelectItem value="maintenance">Maintenance Services</SelectItem>
-                          <SelectItem value="monitoring">24/7 Monitoring</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your full name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="company"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Company</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your company name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="your.email@company.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone</FormLabel>
-                      <FormControl>
-                        <Input placeholder="+91 9876543210" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="note"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Note</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Tell us about your requirements..." {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                  Submit Request
-                </Button>
-              </form>
-            </Form>
-          )}
+
+            {/* Right side: Image */}
+            <div className="w-1/2 bg-white flex items-center justify-center p-0">
+              <img 
+                src="lovable-uploads/ChatGPT Image Jun 12, 2025, 03_57_56 PM.png" 
+                alt="Book a Callback" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
       
