@@ -23,6 +23,8 @@ const scrollbarHideStyles = `
 const CompaniesSection = ({ companies }: CompaniesSectionProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  console.log(companies);
+
   // Optional: implement manual scroll animation for smoother scrolling
   useEffect(() => {
     const scrollContainer = scrollRef.current;

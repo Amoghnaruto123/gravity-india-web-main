@@ -226,7 +226,7 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
             
             <a href="#resources" className="text-gray-700 hover:text-blue-600 relative group transition-colors font-medium whitespace-nowrap">
               Resources
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              {/* { <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>} */}
             </a>
           </div>
 
@@ -237,7 +237,7 @@ const Navigation = ({ isDialogOpen, setIsDialogOpen, form, onSubmit }: Navigatio
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
                   <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 transform transition-all duration-200 px-6 whitespace-nowrap">
-                    Book a Call
+                    Book a CallBack
                   </Button>
                 </DialogTrigger>
               </Dialog>

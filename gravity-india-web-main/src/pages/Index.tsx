@@ -37,24 +37,51 @@ const Index = () => {
     }
   });
 
-  const onSubmit = (data: any) => {
-    console.log("Form submitted:", data);
-    
-    // Show toast notification
-    toast({
-      title: "Booking Confirmed!",
-      description: "Thank you for your interest. We'll contact you within 24 hours to schedule your call.",
-    });
-    
-    // Set form as submitted
-    setFormSubmitted(true);
-    
-    // Close dialog and reset form
-    setTimeout(() => {
-    setIsDialogOpen(false);
-    form.reset();
-      setFormSubmitted(false);
-    }, 1500);
+  const onSubmit = async (data: any) => {
+    const formData = {
+      category: data.category,
+      fullName: data.name,
+      companyName: data.company,
+      email: data.email,
+      phoneNumber: data.phone,
+      note: data.note,
+    };
+
+    console.log("Sending form data:", formData);
+
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbyPHLlRre0t2q4ml4nJpruWrI45TZNWyqDTKMSTuclO1jv2t4k7yxHoPqckA_KiC39-/exec",
+        {
+          method: "POST",
+          mode: "no-cors", // ⚠️ Prevents CORS error but you won't get a readable response
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      // Show toast and close popup
+      toast({
+        title: "Booking Confirmed!",
+        description: "Thank you for your interest. We'll contact you within 24 hours to schedule your call.",
+      });
+
+      setFormSubmitted(true);
+
+      setTimeout(() => {
+        setIsDialogOpen(false);
+        form.reset();
+        setFormSubmitted(false);
+      }, 1500);
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Submission Failed",
+        description: "Something went wrong. Please try again.",
+      });
+    }
   };
 
   const companies = [{

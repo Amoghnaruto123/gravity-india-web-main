@@ -59,7 +59,7 @@ const HeroSection = ({ openBookCallDialog }: HeroSectionProps) => {
                 className="bg-orange-500 hover:bg-orange-600 text-white border-none px-6 py-2 h-11 font-medium w-fit"
                 onClick={openBookCallDialog}
               >
-                Book a Call
+                Book a CallBack
               </Button>
               <Button 
                 className="bg-transparent border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white px-6 py-2 h-11 font-medium w-fit transition-colors"
